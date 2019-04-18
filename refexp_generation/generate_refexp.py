@@ -469,7 +469,8 @@ def instantiate_templates_dfs(scene_struct, template, metadata, answer_counts,
             num_to_option[cnt].append(it_k)
 
         # choose one num randomly
-        rd_num = random.choice(num_to_option.keys())
+
+        rd_num = random.choice(list(num_to_option.keys()))
         # return one option_key
         choice = random.choice(num_to_option[rd_num])
         return choice
@@ -497,13 +498,22 @@ def instantiate_templates_dfs(scene_struct, template, metadata, answer_counts,
           cur_next_vals[param_name] = param_val
           next_input = len(state['nodes']) + len(new_nodes) - 1
 
+        #
+        #print(param_name_val_pair)
+        filter_side_inputs = list(filter_side_inputs[:4]) + \
+                              list([[filter_side_inputs[4], filter_side_inputs[5]]]) + list(filter_side_inputs[6:])
+
+        k = list(k[:4]) + list([[k[4], k[5]]]) + list(k[6:])
+
         param_name_val_pair = zip(filter_side_inputs, k)
 
-        param_name_val_pair = param_name_val_pair[:4] + \
-                              [[[param_name_val_pair[4][0],param_name_val_pair[5][0]],
-                                [param_name_val_pair[4][1],param_name_val_pair[5][1]]]
-                              ] + \
-                              param_name_val_pair[6:]
+        # param_name_val_pair = param_name_val_pair[:4] + \
+        #                       [[[param_name_val_pair[4][0], param_name_val_pair[5][0]],
+        #                         [param_name_val_pair[4][1], param_name_val_pair[5][1]]]
+        #                        ] + \
+        #                       param_name_val_pair[6:]
+
+
                               
         for param_name, param_val in param_name_val_pair:
           if type(param_name) == list and len(param_name) == 2: #ordinal function which has 2 side_input
