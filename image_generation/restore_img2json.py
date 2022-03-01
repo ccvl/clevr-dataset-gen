@@ -7,7 +7,7 @@ def main(index, idx):
   obj_mask = {}
   for _i in range(index):
     path = './tmp_graph_output/indexob{}_{}/Image0001.png'.format(_i,idx)
-    print 'read path...', path
+    print('read path...', path)
     img = cv2.imread(path)[:,:,0].flatten().tolist()
     img = [int(_x==255) for _x in img]
     def to_str(img):

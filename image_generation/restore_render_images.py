@@ -458,7 +458,8 @@ def add_random_objects(scene_struct, args, camera, idx):
     utils.add_material(mat_name, Color=rgba)
 
     # Record data about the object in the scene data structure
-    pixel_coords, _wh = utils.get_camera_coords(camera, obj.location)
+    #print(utils.get_camera_coords(camera, obj.location))
+    pixel_coords = utils.get_camera_coords(camera, obj.location)
     objects.append({
       'shape': obj_name_out,
       'size': size_name,

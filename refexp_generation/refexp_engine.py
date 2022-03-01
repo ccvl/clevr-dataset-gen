@@ -144,7 +144,7 @@ def greater_than_handler(scene_struct, inputs, side_inputs):
   return inputs[0] > inputs[1]
 
 
-def filter_ordinal_function(scene_struct, obj_idxs, (o_num, o_dir)):
+def filter_ordinal_function(scene_struct, obj_idxs, o_num, o_dir):
   o_num_in_meta = ["the first one of the","the second one of the","the third one of the","the fourth one of the",
                   "the fifth one of the","the sixth one of the","the seventh one of the","the eighth one of the",
                   "the nineth one of the"]
@@ -182,7 +182,7 @@ def filter_ordinal(scene_struct, inputs, side_inputs):
   obj_idxs = inputs[0]
   o_num = side_inputs[0]
   o_dir = side_inputs[1]
-  return filter_ordinal_function(scene_struct, obj_idxs, (o_num, o_dir))
+  return filter_ordinal_function(scene_struct, obj_idxs, o_num, o_dir)
 
 
 def get_visible_occlusion_sets(scene_struct, thre1, thre2):
@@ -358,7 +358,7 @@ def answer_refexp(refexp, metadata, scene_struct, all_outputs=False,
     else:
       node_type = node['type']
       msg = 'Could not find handler for "%s"' % node_type
-      assert node_type in execute_handlers, msg
+      #assert node_type in execute_handlers, msg
       handler = execute_handlers[node_type]
       node_inputs = [node_outputs[idx] for idx in node['inputs']]
       side_inputs = node.get('side_inputs', [])
